@@ -22,7 +22,23 @@ public class BeverageRunner1 implements CommandLineRunner {
         loadSomeData();
         loadAllData();
         loadDataByPage();
+        loadDataByLike();
+        loadDataByContaining();
         deleteAndCheckCount();
+    }
+
+    private void loadDataByContaining() {
+        LOGGER.info("find detail with milk");
+        repository.findByDetailContaining("milk").forEach(beverage -> LOGGER.info("find detail with milk:{}",beverage));
+        LOGGER.info("find detail with hot");
+        repository.findByDetailContaining("hot").forEach(beverage -> LOGGER.info("find detail with milk:{}",beverage));
+    }
+
+
+    private void loadDataByLike(){
+        LOGGER.info("find hot");
+        repository.findByTitleLike("hot%").forEach(beverage -> LOGGER.info("hot prefix:{}",beverage));
+        repository.findByTitleLike("%latte").forEach(beverage -> LOGGER.info("end with latte:{}",beverage));
     }
 
     private void loadAllData() {
