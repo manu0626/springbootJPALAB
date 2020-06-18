@@ -24,7 +24,7 @@ public class BeverageRunner1 implements CommandLineRunner {
         loadDataByPage();
         loadDataByLike();
         loadDataByContaining();
-        deleteAndCheckCount();
+        //deleteAndCheckCount();
     }
 
     private void loadDataByContaining() {
