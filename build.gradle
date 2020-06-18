@@ -25,6 +25,10 @@ dependencies {
 	}
 }
 
+bootJar{
+	archiveFileName = 'bootJPA.jar'
+}
+
 test {
 	useJUnitPlatform()
 }
