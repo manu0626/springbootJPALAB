@@ -43,7 +43,15 @@
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.id}">defalut ID</td>
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.lastName}">defalut lastName</td>
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.firstName}">defalut firstName</td>
-    <td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <form th:action="@{/customers/edit}" method="get">
+                <input type="submit" value="edit"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <input type="hidden" , name="id" th:value="${c.id}">
+            </form>
+        </td>
+
+        <td>
         <form th:action="@{/customers/delete}" method="post">
             <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" value="delete"/>
             <input type="hidden" name="id" th:value="${c.id}"/>

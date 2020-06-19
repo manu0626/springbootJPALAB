@@ -57,5 +57,30 @@ public class CustomerController {
 
     }
 
+    @RequestMapping(value = "edit" , method = RequestMethod.GET)
+    String edit(CustomerForm form,@RequestParam Integer id,Model model){
+
+        Customer customer = service.getCustomer(id);
+
+        model.addAttribute("customer",customer);
+
+        form.setFirstName(customer.getFirstName());
+        form.setLastName(customer.getLastName());
+
+        return "customers/edit";
+
+    }
+
+    @RequestMapping(value = "modify" , method = RequestMethod.POST)
+    String modify(CustomerForm form,@RequestParam Integer id){
+        Customer customer = service.getCustomer(id);
+
+        customer.setFirstName(form.getFirstName());
+        customer.setLastName(form.getLastName());
+        service.updateCustomer(customer);
+
+        return "redirect:/customers";
+    }
+
 
 }
