@@ -43,7 +43,13 @@ public class CustomerRunner2 implements CommandLineRunner {
                 customerPage1.getNumber(),customerPage1.getTotalPages(),customerPage1.getTotalElements());
 
         customerPage1.getContent().forEach(customer -> { LOGGER.info("[{}],{}",customerPage1.getNumber(),customer); });
+
+
         Page<Customer> customerPage2 = repository.findAllOrderByName(customerPage1.nextPageable());
+
+        LOGGER.info("page size={}, current number={} , total page={}, total components={}",customerPage2.getSize(),
+                customerPage2.getNumber(),customerPage2.getTotalPages(),customerPage2.getTotalElements());
+
         customerPage2.getContent().forEach(customer -> { LOGGER.info("[{}],{}",customerPage2.getNumber(),customer); });
     }
 }
