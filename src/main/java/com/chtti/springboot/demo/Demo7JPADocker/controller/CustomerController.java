@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("customers")
@@ -20,6 +21,7 @@ public class CustomerController {
     @Autowired
     CustomerService service;
 
+    //方法執行前先執行
     @ModelAttribute
     CustomerForm setupForm(){
         return new CustomerForm();
@@ -27,6 +29,10 @@ public class CustomerController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(@Validated CustomerForm form, BindingResult result,Model model){
+
+        if(result.hasErrors()){
+            return listAll(model);
+        }
 
         Customer customer = new Customer();
         BeanUtils.copyProperties(form,customer);
@@ -42,5 +48,14 @@ public class CustomerController {
 
         return "customers/list";
     }
+
+    @RequestMapping(value = "delete" , method = RequestMethod.POST)
+    String delete(@RequestParam Integer id){
+
+        service.deleteCustomer(id);
+        return "redirect:/customers";
+
+    }
+
 
 }

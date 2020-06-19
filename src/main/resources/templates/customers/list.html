@@ -13,11 +13,17 @@
         <dl>
             <dt><label for="lastName">lastName</label></dt>
             <dd>
-                <input type="text" id="lastName" name="lastName" th:field="*{lastName}" value="default last name" />
+                <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                       value="default last name" th:errorclass="error-input"/>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                      class="error-message">Error!</span>
             </dd>
             <dt><label for="firstName">firstName</label></dt>
             <dd>
-                <input type="text" id="firstName" name="firstName" th:field="*{firstName}" value="default first name" />
+                <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
+                       value="default first name" th:errorclass="error-input"/>
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                      class="error-message">Error!</span>
             </dd>
         </dl>
         <input type="submit" value="Add" />
@@ -37,6 +43,12 @@
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.id}">defalut ID</td>
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.lastName}">defalut lastName</td>
         <td class="mdl-data-table__cell--non-numeric" th:text="${c.firstName}">defalut firstName</td>
+    <td>
+        <form th:action="@{/customers/delete}" method="post">
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" value="delete"/>
+            <input type="hidden" name="id" th:value="${c.id}"/>
+        </form>
+    </td>
     </tr>
 
 </table>
